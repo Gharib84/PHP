@@ -1,0 +1,7 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "[python]": {},
+    "php.validate.enable":true,
+    "php.validate.executablePath": null,
+    "php.validate.run": "onSave"
+}
