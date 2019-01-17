@@ -1,40 +1,44 @@
-<?php 
-require_once("./header.php");?>
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4">
-                <hr>
-                <h3 class="text-danger">Add Product Item</h3>
-                <form action="." method="POST">
-                <input type="hidden" name="action" value="add">
-                <label for="defaultFormLoginEmailEx" class="grey-text">Name:</label>
-                <select  id="defaultFormLoginPasswordEx"   name = "productkey" class="form-control">
-                <?php foreach($products as $key => $product): 
-                        $cost = number_format($product["cost"], 2);
-                        $name = $product["name"];
-                        $item = $name . '($' .$cost . ')';
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Guitar Shop</title>
+    <link rel="stylesheet" href="../view/main.css">
+</head>
+<body>
+    <header>
+        <h1>My Guitar Shop</h1>
+    </header>
+    <main>
+        <h1>Add Item</h1>
+        <form action="." method="post">
+            <input type="hidden" name="action" value="add">
 
-                    ;?>
-                    <option value="<?php print  $key;?>"><?php  print $item;?></option>
-                    <?php endforeach;?>
+            <label>Name:</label>
+            <select name="productkey">
+            <?php foreach($products as $key => $product) :
+                $cost = number_format($product['cost'], 2);
+                $name = $product['name'];
+                $item = $name . ' ($' . $cost . ')';
+            ?>
+                <option value="<?php echo $key; ?>">
+                    <?php echo $item; ?>
+                </option>
+            <?php endforeach; ?>
+            </select><br>
 
-                </select>
-                <label for="defaultFormLoginEmailEx" class="grey-text mt-3">Quantity:</label>
-                <select  id="defaultFormLoginPasswordEx"   name = "itemqty" class="form-control">
-                    <?php  for($i = 0; $i<=10; $i++): ;?>
-                    <option value="<?php print $i;?>"><?php print $i;?></option>
-                <?php endfor;?>
-                    </select>
-                        <div class="text-center mt-4">
-                        <button class="btn btn-indigo" type="submit" name="add_product">Add Product</button>
-                        <a href=".?action=show_cart" class="btn btn-indigo">View Cart</a> 
-                    </div>
-            </form>      
-        </div>
-        <div class="col-md-8 mt-2">
-               <?php include("cart_view.php");?>     
-        </div>
-    </div>
-</div>
+            <label>Quantity:</label>
+            <select name="itemqty">
+            <?php for($i = 1; $i <= 10; $i++) : ?>
+                <option value="<?php echo $i; ?>">
+                    <?php echo $i; ?>
+                </option>
+            <?php endfor; ?>
+            </select><br>
 
-<?php require_once("./footer.php"); ?>
+            <label>&nbsp;</label>
+            <input type="submit" value="Add Item">
+        </form>
+        <p><a href=".?action=show_cart">View Cart</a></p>    
+    </main>
+</body>
+</html>

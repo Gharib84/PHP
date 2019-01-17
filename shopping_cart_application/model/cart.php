@@ -1,59 +1,71 @@
-<?php 
-
-function add_item($key, $quant){
+<?php
+namespace cart {
+    // Add an item to the cart
+    function add_item($key, $quantity) {
         global $products;
-        if ($quant < 1){ 
-            
-            return false;
+        if ($quantity < 1) return;
+
+        // If item already exists in cart, update quantity
+        if (isset($_SESSION['cart13'][$key])) {
+            $quantity += $_SESSION['cart13'][$key]['qty'];
+            update_item($key, $quantity);
+            return;
         }
-        if (isset($_SESSION["cart12"][$key])) {
-            
-            $quant += $_SESSION["cart12"][$key][$quant];
-            update_item($key, $quant);
-            return $quant;
-        }
-        $cost = $products[$key]["cost"];
-        $total = $cost * $quant;
-        $item = Array(
-            "name" => $_SESSION["cart12"][$key]["name"],
-            "cost" => $cost,
-            "qty" => $quant,
-            "total"=> $total
+
+        // Add item
+        $cost = $products[$key]['cost'];
+        $total = $cost * $quantity;
+        $item = array(
+            'name' => $products[$key]['name'],
+            'cost' => $cost,
+            'qty'  => $quantity,
+            'total' => $total
         );
-        $_SESSION["cart12"][$key] = $item;
+        $_SESSION['cart13'][$key] = $item;
+    }
 
-
-
-}
-
-
-
-function update_item($key, $quant){
-    $quant = (int) $quant;
-    if ($_SESSION["cart"][$key]) {
-        if ($quant <= 0) {
-            unset($_SESSION["cart12"][$key]);
-        }else {
-            $_SESSION["cart12"][$key]["qty"] = $quant;
-            $total = $_SESSION["cart12"][$key]["cost"] *
-            $_SESSION["cart12"][$key]["qty"];
-            $_SESSION["cart12"][$key]["total"] = $total;
-    
+    // Update an item in the cart
+    function update_item($key, $quantity) {
+        $quantity = (int) $quantity;
+        if (isset($_SESSION['cart13'][$key])) {
+            if ($quantity <= 0) {
+                unset($_SESSION['cart13'][$key]);
+            } else {
+                $_SESSION['cart13'][$key]['qty'] = $quantity;
+                $total = $_SESSION['cart13'][$key]['cost'] *
+                         $_SESSION['cart13'][$key]['qty'];
+                $_SESSION['cart13'][$key]['total'] = $total;
+            }
         }
     }
-   
+
+    // Get cart subtotal
+    function get_subtotal() {
+        $subtotal = 0;
+        foreach ($_SESSION['cart13'] as $item) {
+            $subtotal += $item['total'];
+        }
+        $subtotal_f = number_format($subtotal, 2);
+        return $subtotal_f;
+    }
+
+    // Get a function for sorting the cart on the specified key
+    function compare_factory($sort_key) {
+        return function($left, $right) use ($sort_key) {
+            if ($left[$sort_key] == $right[$sort_key]) {
+                return 0;
+            } else if ($left[$sort_key] < $right[$sort_key]) {
+                return -1;
+            } else {
+                return 1;
+            }
+        };
+    }
+
+    // Sort the cart on the specified key
+    function sort($sort_key) {
+        $compare_function = compare_factory($sort_key);
+        usort($_SESSION['cart13'], $compare_function);
+    }
 }
-
-function get_subtotal(){
-   $subtotal = 0;
-   foreach($_SESSION["cart12"] as $items){
-       $subtotal += $items["total"];
-   }
-   $stubtotal_format = number_format($subtotal, 2);
-   return $subtotal;
-
-}
-
-
-
 ?>
