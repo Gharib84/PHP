@@ -5,7 +5,7 @@
         <div class="row">
                 <div class="col-md-8">
                     
-<!-- Default form login -->
+<!-- Default form-->
 <form action="index.php" method="POST">
 <input type="hidden" name="action" value="add_product">
     <p class="h4 text-center mb-4">Add Product</p>
