@@ -5,12 +5,12 @@
         <div class="row">
                 <div class="col-md-8">
                     
-<!-- Default form-->
+<!--Default form-->
 <form action="index.php" method="POST">
 <input type="hidden" name="action" value="add_product">
     <p class="h4 text-center mb-4">Add Product</p>
 
-    <!-- Default input email -->
+    <!--Default input-->
     <label for="defaultFormLoginEmailEx" class="grey-text">Your Category</label>
     <select  id="defaultFormLoginPasswordEx"   name = "category_id" class="form-control">
     <?php foreach($categories as  $category): ?>
@@ -33,7 +33,7 @@
     </div>
 </form>
         <a href="index.php?action=list_products">View Product List</a>
-<!-- Default form login --> 
+<!--Default form--> 
         </div>
     </div> 
 </div>
