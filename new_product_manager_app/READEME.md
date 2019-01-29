@@ -4,6 +4,7 @@
 
 > The Add Product page lets the user add a new product. This page starts by displaying a drop-down list that lets the user select a category for the product. Then, it displays three text boxes that lets the user enter data for the product's code, name, and price. Next, it displays an Add Product button that lets the user submit the data for the product. Finally, this page displays a View Product List link that lets the user return to the Product List page without adding a product.
 
+![first 1](https://user-images.githubusercontent.com/29811601/51920722-3dee7a00-23e6-11e9-820f-26bfe74756fb.png)
  
 
  
