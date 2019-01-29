@@ -12,7 +12,7 @@ class Database
 
     }
 
-    public function getDB(){
+    public static function getDB(){
         if (!isset(self::$obj)) {
             try {
                 self::$obj =  new PDO(self::$data_source, self::$user, self::$pass, self::$option);
