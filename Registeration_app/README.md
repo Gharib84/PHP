@@ -8,6 +8,7 @@ with error messages next to the invalid data. Once the user submits valid data,
 the application can process the data and display the next page.
 
 >Main Registeration Form Page Look Like This
+
 ![form 1](https://user-images.githubusercontent.com/29811601/53291613-5a4bbf80-37b6-11e9-8ce9-81636721fff7.png)
 
 >The Success Submit 
